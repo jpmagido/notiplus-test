@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Brand::Company, type: :model do
   include_context 'actions'
+  include_context 'auth0'
 
   describe 'relations' do
     let(:brand_company) do
@@ -25,7 +26,7 @@ RSpec.describe Brand::Company, type: :model do
 
   describe 'accepted APE' do
     let(:ape_code) { siret_lookup_response[:uniteLegale][:periodesUniteLegale][0][:activitePrincipaleUniteLegale] }
-    let(:brand_company) { create(:brand_company, label: ape_code) }
+    let(:brand_company) { build_stubbed(:brand_company, owner_id: user_account_success.id, label: ape_code) }
 
     it 'should create a valid company' do
       expect(brand_company).to be_valid
@@ -34,7 +35,7 @@ RSpec.describe Brand::Company, type: :model do
 
   describe 'denied APE' do
     let(:ape_code) { siret_lookup_response_failed[:uniteLegale][:periodesUniteLegale][0][:activitePrincipaleUniteLegale] }
-    let(:brand_company) { build(:brand_company, label: ape_code) }
+    let(:brand_company) { build_stubbed(:brand_company, owner_id: user_account_fail.id, label: ape_code) }
 
     it 'should create a valid company' do
       expect(brand_company).not_to be_valid

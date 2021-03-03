@@ -11,17 +11,14 @@ RSpec.describe UserAccount, type: :model do
   end
 
   describe 'auth0_uid success' do
-    let(:user_account) { build(:user_account, auth0_uid: auth_created_user['user_id']) }
-
     it 'should create a valid user_account' do
-      expect(user_account).to be_valid
+      expect(user_account_success).to be_valid
     end
   end
 
   describe 'auth0_uid fail' do
-    let(:user_account) { build(:user_account, auth0_uid: auth_created_user_failed['user_id']) }
     it 'should not create a valid user_account' do
-      expect(user_account).not_to be_valid
+      expect(user_account_fail).not_to be_valid
     end
   end
 
