@@ -28,6 +28,7 @@ group :test do
   gem 'database_cleaner', "~> 1.8"
   gem 'factory_bot_rails', "~> 5.2"
   gem 'ffaker'
+  gem 'faker', '~> 2.16'
   gem 'rack_session_access', "~> 0.2"
   gem 'rspec-rails', "~> 4.0"
   gem 'selenium-webdriver', "~> 3.142"

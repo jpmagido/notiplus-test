@@ -25,7 +25,7 @@ RSpec.describe Brand::Company, type: :model do
   end
 
   describe 'accepted APE' do
-    label = siret_lookup_response[:uniteLegale][:periodesUniteLegale][0][:nomUniteLegale]
+    #label = siret_lookup_response[:uniteLegale][:periodesUniteLegale][0][:nomUniteLegale]
     let(:ape_code) { siret_lookup_response[:uniteLegale][:periodesUniteLegale][0][:activitePrincipaleUniteLegale] }
     let(:brand_company) { build_stubbed(:brand_company, owner_id: user_account_success.id, label: ape_code) }
 
@@ -35,7 +35,7 @@ RSpec.describe Brand::Company, type: :model do
   end
 
   describe 'denied APE' do
-    label = siret_lookup_response_failed[:uniteLegale][:periodesUniteLegale][0][:nomUniteLegale]
+    #label = siret_lookup_response_failed[:uniteLegale][:periodesUniteLegale][0][:nomUniteLegale]
     let(:ape_code) { siret_lookup_response_failed[:uniteLegale][:periodesUniteLegale][0][:activitePrincipaleUniteLegale] }
     let(:brand_company) { build_stubbed(:brand_company, owner_id: user_account_fail.id, label: ape_code) }
 
