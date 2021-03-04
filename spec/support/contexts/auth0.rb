@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.shared_context 'auth0', shared_context: :metadata do
-  let(:user_account_fail) { build_stubbed(:user_account, auth0_uid: auth_created_user_failed['user_id']) }
-  let(:user_account_success) { create(:user_account, auth0_uid: auth_created_user['user_id']) }
-
   let(:auth_created_user) do
     {
         "created_at" => "2021-02-17T00:41:54.683Z",

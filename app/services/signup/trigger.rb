@@ -1,6 +1,6 @@
 module Signup
   class Trigger < ApplicationService
-    attr_reader :user_account, :brand_company
+    attr_reader :user_account, :brand_company, :brand_account, :brand_member
 
     def initialize(params)
       @email = params[:email]
@@ -12,7 +12,7 @@ module Signup
 
     def process
       user
-      company
+      brand
     end
 
     private
@@ -27,11 +27,32 @@ module Signup
       )
     end
 
-    def company
+    def brand
+      create_company
+      create_account
+      create_membership
+    end
+
+    def create_company
       @brand_company = Brand::Company.create(
           owner_id: user_account.id,
           siren_number: @siret[0..8],
           label: ape_code
+      )
+    end
+
+    def create_account
+      @brand_account = Brand::Account.create(
+          brand_company_id: brand_company.id,
+          label: brand_company.label,
+          siret_number: @siret
+      )
+    end
+
+    def create_membership
+      @brand_member = Brand::Member.create(
+          brand_account_id: brand_account.id,
+          user_account_id: user_account.id
       )
     end
 
